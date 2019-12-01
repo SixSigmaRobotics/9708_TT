@@ -10,15 +10,14 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// LB                   motor         11              
-// LF                   motor         12              
-// RF                   motor         19              
-// RB                   motor         20              
+// R                    motor         20              
 // IL                   motor         1               
 // IR                   motor         10              
 // Tray                 motor         2               
-// Lift                 motor         9               
+// LiftR                motor         9               
 // Controller1          controller                    
+// L                    motor         11              
+// LiftL                motor         3               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -27,11 +26,8 @@ using namespace vex;
 
 // A global instance of competition
 competition Competition;
-
-motor_group leftDrive(LB, LF);
-motor_group rightDrive(RB, RF);
 motor_group Intake(IL, IR);
-
+motor_group Lift(LiftR,LiftL);
 // define your global instances of motors and other devices here
 
 /*---------------------------------------------------------------------------*/
@@ -65,20 +61,16 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
-  leftDrive.spin(forward, 50, percent);
-  rightDrive.spin(forward, 50, percent);
-  Intake.spin(forward, 100, percent);
-  wait(3000, msec);//run above code for 3 seconds.
-  leftDrive.spin(reverse, 50, percent);
-  rightDrive.spin(reverse, 50, percent);
-  wait(3000, msec);//run code for 3 seconds
-  rightDrive.spin(forward, 50, percent);
-  wait(500, msec);//run code for half a second
-   leftDrive.spin(forward, 50, percent);
-  rightDrive.spin(forward, 50, percent);
-  Intake.spin(forward, 100, percent);
-  wait(750, msec);
-
+ L.spin(forward, 50, percent);
+  R.spin(forward, 50, percent);
+  wait(2000, msec);//run above code for 3 seconds.
+  L.stop(hold);
+  R.stop(hold);
+ L.spin(reverse, 50, percent);
+  R.spin(reverse, 50, percent);
+  wait(2000, msec);//run above code for 3 seconds.
+  L.stop(hold);
+  R.stop(hold);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -129,19 +121,21 @@ void drivetrainControl() {
   if (abs(rSpeed) < 10)
     rSpeed = 0;
 
-  leftDrive.spin(vex::directionType::fwd, lSpeed, vex::velocityUnits::pct);
-  rightDrive.spin(vex::directionType::fwd, rSpeed, vex::velocityUnits::pct);
+  L.spin(vex::directionType::fwd, lSpeed, vex::velocityUnits::pct);
+  R.spin(vex::directionType::fwd, rSpeed, vex::velocityUnits::pct);
 }
 
 void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
-    intakeControl();
-    liftControl();
-    trayControl();
-    drivetrainControl();
+   intakeControl();
+   liftControl();
+   trayControl();
+   drivetrainControl();
+ 
     wait(100, msec); // Sleep the task for a short amount of time to
-  }                 // prevent wasted resources.
+  }                 // prevent wasted resources.*/
+  
 }
 
 //
