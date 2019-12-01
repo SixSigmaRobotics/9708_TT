@@ -113,9 +113,9 @@ void liftControl() {
 void trayControl() {
 
   if (Controller1.ButtonR1.pressing())
-    Tray.spin(forward, 20, percent);
+    Tray.spin(forward, 15, percent);
   else if (Controller1.ButtonR2.pressing())
-    Tray.spin(reverse, 20, percent);
+    Tray.spin(reverse, 15, percent);
   else
     Tray.stop(hold);
   return;
