@@ -12,14 +12,13 @@ motor R = motor(PORT20, ratio18_1, true);
 motor IL = motor(PORT1, ratio18_1, false);
 motor IR = motor(PORT10, ratio18_1, true);
 motor Tray = motor(PORT2, ratio18_1, false);
-motor LiftR = motor(PORT9, ratio36_1, false);
+motor Lift = motor(PORT9, ratio36_1, false);
 controller Controller1 = controller(primary);
 motor L = motor(PORT11, ratio18_1, false);
-motor LiftL = motor(PORT3, ratio36_1, true);
 
 // VEXcode generated functions
-
-
+// define variable for remote controller enable/disable
+bool RemoteControlCodeEnabled = true;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.

@@ -7,10 +7,9 @@ extern motor R;
 extern motor IL;
 extern motor IR;
 extern motor Tray;
-extern motor LiftR;
+extern motor Lift;
 extern controller Controller1;
 extern motor L;
-extern motor LiftL;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.

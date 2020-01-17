@@ -1,3 +1,26 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// R                    motor         20              
+// IL                   motor         1               
+// IR                   motor         10              
+// Tray                 motor         2               
+// LiftR                motor         9               
+// Controller1          controller                    
+// L                    motor         11              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// R                    motor         20              
+// IL                   motor         1               
+// IR                   motor         10              
+// Tray                 motor         2               
+// LiftR                motor         9               
+// Controller1          controller                    
+// L                    motor         11              
+// LiftL                motor         3               
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -27,7 +50,7 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 motor_group Intake(IL, IR);
-motor_group Lift(LiftR,LiftL);
+motor_group Lift(LiftR);
 // define your global instances of motors and other devices here
 
 /*---------------------------------------------------------------------------*/
@@ -105,9 +128,9 @@ void liftControl() {
 void trayControl() {
 
   if (Controller1.ButtonR1.pressing())
-    Tray.spin(forward, 15, percent);
+    Tray.spin(forward, 25, percent);
   else if (Controller1.ButtonR2.pressing())
-    Tray.spin(reverse, 15, percent);
+    Tray.spin(reverse, 25, percent);
   else
     Tray.stop(hold);
   return;
