@@ -1,3 +1,15 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// R                    motor         20              
+// L                    motor         11              
+// IL                   motor         1               
+// IR                   motor         10              
+// Tray                 motor         2               
+// Lift                 motor         9               
+// Angle                motor         3               
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
