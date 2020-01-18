@@ -1,26 +1,3 @@
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// R                    motor         20              
-// IL                   motor         1               
-// IR                   motor         10              
-// Tray                 motor         2               
-// LiftR                motor         9               
-// Controller1          controller                    
-// L                    motor         11              
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// R                    motor         20              
-// IL                   motor         1               
-// IR                   motor         10              
-// Tray                 motor         2               
-// LiftR                motor         9               
-// Controller1          controller                    
-// L                    motor         11              
-// LiftL                motor         3               
-// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -30,20 +7,21 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+
+#include "vex.h"
+
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
 // R                    motor         20              
+// L                    motor         11              
 // IL                   motor         1               
 // IR                   motor         10              
 // Tray                 motor         2               
-// LiftR                motor         9               
-// Controller1          controller                    
-// L                    motor         11              
-// LiftL                motor         3               
+// Lift                 motor         9               
+// Angle                motor         3               
 // ---- END VEXCODE CONFIGURED DEVICES ----
-
-#include "vex.h"
 
 using namespace vex;
 
@@ -65,6 +43,7 @@ motor_group Intake(IL, IR);
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+  
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
@@ -80,13 +59,10 @@ void pre_auton(void) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous(void) {
-  // ..........................................................................
-  // Insert autonomous user code here.
-  // ..........................................................................
- L.spin(forward, 50, percent);
-  R.spin(forward, 50, percent);
-  wait(2000, msec);//run above code for 3 seconds.
-  L.stop(hold);
+L.spin(forward, 50, percent);
+R.spin(forward, 50, percent);
+ wait(2000, msec);//run above code for 3 seconds.
+ L.stop(hold);
   R.stop(hold);
  L.spin(reverse, 50, percent);
   R.spin(reverse, 50, percent);
@@ -116,9 +92,9 @@ void intakeControl() {
 
 void liftControl() {
   if (Controller1.ButtonX.pressing())
-    Lift.spin(forward, 100, percent);
-  else if (Controller1.ButtonB.pressing())
     Lift.spin(reverse, 100, percent);
+  else if (Controller1.ButtonB.pressing())
+    Lift.spin(forward, 100, percent);
   else
     Lift.stop(hold);
   return;
@@ -127,14 +103,24 @@ void liftControl() {
 void trayControl() {
 
   if (Controller1.ButtonR1.pressing())
-    Tray.spin(forward, 65, percent);
+    Tray.spin(forward, 25, percent);
   else if (Controller1.ButtonR2.pressing())
-    Tray.spin(reverse, 65, percent);
+    Tray.spin(reverse, 25, percent);
   else
     Tray.stop(hold);
   return;
 }
 
+void intakeAngle()
+ {
+   if ( Controller1.ButtonUp.pressing())
+   Angle.spin(forward,10, percent);
+   else if (Controller1.ButtonDown.pressing())
+   Angle.spin(reverse,10,percent);
+   else
+   Angle.stop(hold);
+   return;
+ }
 void drivetrainControl() {
   int lSpeed = Controller1.Axis3.position();
   int rSpeed = Controller1.Axis2.position();
@@ -147,17 +133,18 @@ void drivetrainControl() {
   R.spin(vex::directionType::fwd, rSpeed, vex::velocityUnits::pct);
 }
 
+
 void usercontrol(void) {
   // User control code here, inside the loop
-  while (1) {
+ while (1) {
    intakeControl();
    liftControl();
    trayControl();
    drivetrainControl();
+   intakeAngle();
  
     wait(100, msec); // Sleep the task for a short amount of time to
-  }                 // prevent wasted resources.*/
-  
+  }
 }
 
 //
