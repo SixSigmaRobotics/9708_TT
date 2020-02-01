@@ -13,7 +13,7 @@ motor R = motor(PORT20, ratio18_1, true);
 motor L = motor(PORT11, ratio18_1, false);
 motor IL = motor(PORT1, ratio18_1, false);
 motor IR = motor(PORT10, ratio18_1, true);
-motor Tray = motor(PORT2, ratio18_1, false);
+motor Tray = motor(PORT2, ratio36_1, false);
 motor Lift = motor(PORT9, ratio18_1, true);
 motor Angle = motor(PORT3, ratio36_1, false);
 

@@ -15,7 +15,7 @@ motor L = motor(PORT1, ratio18_1, false);
 motor TL = motor(PORT10, ratio36_1, true);
 motor IR = motor(PORT18, ratio18_1, true);
 motor IL = motor(PORT9, ratio18_1, false);
-motor Lift = motor(PORT19, ratio36_1, false);
+motor Lift = motor(PORT19, ratio36_1, true);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable

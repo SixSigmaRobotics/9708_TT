@@ -27,10 +27,10 @@ void pre_auton(void) {
 }
 
 void onePoint() {
-  setup();
+  //setup();
   drive(f,50,2000);
   stop();
-  drive(r,50,2000);
+  drive(b,50,2000);
   stop();
   return;
 }
@@ -73,12 +73,12 @@ void intakeControl() {
 void liftControl() {
   if (Controller1.ButtonX.pressing()) {
     Lift.spin(reverse, 100, percent);
-    Tray.spin(forward, 25, percent);
+   // Tray.spin(forward, 50, percent);
   }
     
   else if (Controller1.ButtonB.pressing()) {
     Lift.spin(forward, 100, percent);
-    Tray.spin(reverse, 25, percent);
+    //Tray.spin(reverse, 50, percent);
   }
     
   else {
@@ -106,21 +106,20 @@ void drivetrainControl() {
   if (abs(rSpeed) < 10)
     rSpeed = 0;
   
-  L.spin(forward, lSpeed, pct);
-  R.spin(forward, rSpeed, pct);
+  L.spin(forward, lSpeed*0.80, pct);
+  R.spin(forward, rSpeed*0.80, pct);
 }
 
 
 void usercontrol(void) {
- /*while (true) {
+ while (true) {
    intakeControl();
    liftControl();
    trayControl();
    drivetrainControl();
  
     wait(20, msec);
-  }*/
-  setup();
+  }
 }
 
 int main() {
