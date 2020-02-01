@@ -57,18 +57,30 @@ void pre_auton(void) {
 /*                                                                           */
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
-
-void autonomous(void) {
-L.spin(forward, 50, percent);
-R.spin(forward, 50, percent);
- wait(2000, msec);//run above code for 3 seconds.
- L.stop(hold);
-  R.stop(hold);
- L.spin(reverse, 50, percent);
-  R.spin(reverse, 50, percent);
+void onePoint() {
+  L.spin(forward, 50, percent);
+  R.spin(forward, 50, percent);
   wait(2000, msec);//run above code for 3 seconds.
+
   L.stop(hold);
   R.stop(hold);
+  
+  L.spin(reverse, 50, percent);
+  R.spin(reverse, 50, percent);
+  wait(2000, msec);//run above code for 3 seconds.
+
+  L.stop(hold);
+  R.stop(hold);
+  return;
+}
+
+void fourPoint() {
+  return;
+}
+
+void autonomous(void) {
+  onePoint();
+  return;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -101,7 +113,6 @@ void liftControl() {
 }
 
 void trayControl() {
-
   if (Controller1.ButtonR1.pressing())
     Tray.spin(forward, 25, percent);
   else if (Controller1.ButtonR2.pressing())
@@ -111,16 +122,16 @@ void trayControl() {
   return;
 }
 
-void intakeAngle()
- {
-   if ( Controller1.ButtonUp.pressing())
-   Angle.spin(forward,10, percent);
-   else if (Controller1.ButtonDown.pressing())
+void intakeAngleControl() {
+  if (Controller1.ButtonUp.pressing())
+    Angle.spin(forward,10, percent);
+  else if (Controller1.ButtonDown.pressing())
    Angle.spin(reverse,10,percent);
-   else
+  else
    Angle.stop(hold);
-   return;
+  return;
  }
+
 void drivetrainControl() {
   int lSpeed = Controller1.Axis3.position();
   int rSpeed = Controller1.Axis2.position();
@@ -141,7 +152,7 @@ void usercontrol(void) {
    liftControl();
    trayControl();
    drivetrainControl();
-   intakeAngle();
+   intakeAngleControl();
  
     wait(100, msec); // Sleep the task for a short amount of time to
   }
